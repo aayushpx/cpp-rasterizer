@@ -40,7 +40,7 @@ Unlike a traditional Cartesian plane:
 
 This means screen-space coordinates behave differently from standard mathematical graphs.
 
-<!-- Insert coordinate system image here -->
+![Figure 1.1](images/xy_p.png)
 
 ---
 
