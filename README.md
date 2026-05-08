@@ -1,199 +1,93 @@
 # C++ Software Rasterizer
 
-A low-level 2D graphics project exploring how images are generated programmatically using pixels, RGB colour values, and the Portable Pixel Map (PPM) image format.
+![Colombia Flag](images/colombia_flag.png)
 
-This project focuses on building images from scratch **without external graphics libraries**, using only standard C++ and direct pixel manipulation.
-
----
-
-## Screens and Pixels
-
-A screen consists of thousands (or millions) of tiny picture elements called **pixels**.
-
-The origin of the term *picture element* is thought to trace back to Germany in 1880 with the word *Bildpunkt* (“picture point”), which later translated into English as *picture element*.
-
-Each pixel produces one colour. An image is therefore created from a large collection of pixels, each set to a specific colour.
-
-The number of pixels used in a display is called the **resolution**.
-
-For example:
-
-```txt
-1920 × 1080
-```
-
-means:
-
-* 1920 pixels across the screen
-* 1080 pixels down the screen
+A simple CPU-based rasterizer that generates `.ppm` images from scratch using raw pixel manipulation in C++ - no graphics libraries.
 
 ---
 
-## 2D Screen Coordinates
+## How it works
 
-Most displays use a two-dimensional `(x, y)` coordinate system.
+A screen is made of pixels, where each pixel stores an RGB colour.
 
-Unlike a traditional Cartesian plane:
-
-* the `x` axis increases to the right
-* the `y` axis increases *downwards*
-
-This means screen-space coordinates behave differently from standard mathematical graphs.
-
-![Figure 1.1](images/xy_p.png)
+Images are constructed by filling a 2D grid of pixels.
 
 ---
 
-## The RGB Colour Model
+## Pixel Coordinates
 
-Each pixel is composed of three overlapping light channels:
+Screens use a 2D coordinate system:
 
-* Red
-* Green
-* Blue
+- x increases → right  
+- y increases → down  
 
-Each channel has an intensity ranging from:
-
-```txt
-0 → OFF
-255 → Full intensity
-```
-
-By combining different intensity values, a large range of colours can be produced.
-
-### Examples
-
-```txt
-0   0   0     = Black
-255 255 255   = White
-255 0   0     = Red
-0   255 0     = Green
-0   0   255   = Blue
-```
+<img src="images/xy_p.png" width="550">
+Each (x, y) maps directly to a pixel in memory.
 
 ---
 
-## The PPM File Format
+## RGB Colour Model
 
-This project uses the **Portable Pixel Map (PPM)** format because it is simple and programmer-friendly.
+Each pixel is:
 
-A `.ppm` file stores raw RGB pixel data as plain ASCII text.
+R G B
 
-Example header:
+Each value ranges:
+- 0 = OFF
+- 255 = FULL INTENSITY
 
-```txt
-P3
-# myimage.ppm
-500 300
-256
-```
+Examples:
+- Black → 0 0 0  
+- White → 255 255 255  
+- Red → 255 0 0  
 
-### Header Breakdown
-
-1. File format identifier
-
-```txt
-P1 = portable bitmap ASCII
-P2 = portable greymap ASCII
-P3 = portable pixelmap ASCII
-P4 = portable bitmap rawbits
-P5 = portable greymap rawbits
-P6 = portable pixelmap rawbits
-```
-
-This project uses:
-
-```txt
-P3
-```
-
-which stores RGB values as ASCII text.
+Reference: https://en.wikipedia.org/wiki/RGB_color_model
 
 ---
 
-2. Filename comment
+## PPM Format
 
-```txt
-# myimage.ppm
-```
+Images are stored as plain text `.ppm` files:
 
----
+P3  
+# image.ppm  
+600 400  
+256  
 
-3. Image resolution
+Followed by RGB values per pixel.
 
-```txt
-500 300
-```
-
-meaning:
-
-* 500 pixels wide
-* 300 pixels tall
+More info: https://en.wikipedia.org/wiki/Netpbm
 
 ---
 
-4. Intensity range
+## What this project includes
 
-```txt
-256
-```
-
-representing intensity values from:
-
-```txt
-0 → 255
-```
-
-for each RGB channel.
-
----
-
-## Current Experiments
-
-* Colombia flag renderer
-* Rectangle rasterization
-* Pixel framebuffer manipulation
-* RGB colour experimentation
+- Pixel framebuffer in C++
+- Manual RGB image generation
+- Rectangle filling
+- Flag rendering using layered regions
+- Export to `.ppm` format
 
 ---
 
 ## Example Output
 
-## Colombia Flag
-![Columbia Flag](images/colombia_flag.png)
+Colombia Flag generated using pure C++:
+
+![Colombia Flag](images/colombia_flag.png)
 
 ---
 
-## Build and Run
-
-Compile:
+## Build & Run
 
 ```bash
-g++ src/colombia_flag.cpp -o raster
-```
-
-Run:
-
-```bash
+g++ src/main.cpp -o raster
 ./raster
-```
-
-Open generated image:
-
-```bash
-xdg-open colombia_flag.ppm
+xdg-open output.ppm
 ```
 
 ---
 
-## Goals
+## Goal
 
-* Understand low-level raster graphics fundamentals
-* Explore image generation from raw pixel data
-* Build reusable rendering primitives
-* Experiment with software-based rendering techniques
-
----
-
-This is a learning project exploring the foundations of computer graphics and rasterization in C++.
-
+Understand how images are built from raw pixels and how screen coordinates map to memory.
