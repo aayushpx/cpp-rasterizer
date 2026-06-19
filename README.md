@@ -1,5 +1,7 @@
 # C++ Software Rasterizer
 
+![Mandelbrot Set](images/mandelbrot.png)
+
 ![Colombia Flag](images/colombia_flag.png)
 
 A simple CPU-based rasterizer that generates `.ppm` images from scratch using raw pixel manipulation in C++ - no graphics libraries.
