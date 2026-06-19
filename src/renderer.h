@@ -1,5 +1,6 @@
 #ifndef RENDERER_H
 #define RENDERER_H
+#pragma once
 
 #include "pixel.h"
 
@@ -10,5 +11,6 @@ void fillRectangle(int x1, int y1,
                    int r, int g, int b);
 
 void colombiaFlag();
+void mandelbrot();
 
 #endif

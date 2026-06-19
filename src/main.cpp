@@ -8,26 +8,26 @@ Pixel picture[600][400];
 
 int main() {
 
-    colombiaFlag();
+  mandelbrot();
 
-    std::fstream myfile;
-    myfile.open("colombia_flag.ppm",
-                std::fstream::out);
+  std::fstream myfile;
+  myfile.open("mandelbrot.ppm",
+              std::fstream::out);
 
-    myfile << "P3\n";
-    myfile << "# colombia_flag.ppm\n";
-    myfile << "600 400\n";
-    myfile << "256\n";
+  myfile << "P3\n";
+  myfile << "# mandelbrot.ppm\n";
+  myfile << "600 400\n";
+  myfile << "256\n";
 
-    for (int y = 0; y < 400; y++) {
-        for (int x = 0; x < 600; x++) {
-            picture[x][y].dataToFile(myfile);
-        }
-
-        myfile << std::endl;
+  for (int y = 0; y < 400; y++) {
+    for (int x = 0; x < 600; x++) {
+      picture[x][y].dataToFile(myfile);
     }
 
-    myfile.close();
+    myfile << std::endl;
+  }
 
-    return 0;
+  myfile.close();
+
+  return 0;
 }
