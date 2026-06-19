@@ -1,10 +1,9 @@
 # C++ Software Rasterizer
 
+### Mandelbrot Set
 ![Mandelbrot Set](images/mandelbrot.png)
 
-![Colombia Flag](images/colombia_flag.png)
-
-A simple CPU-based rasterizer that generates `.ppm` images from scratch using raw pixel manipulation in C++ - no graphics libraries.
+A CPU-based software rasterizer that generates .ppm images from scratch using raw pixel manipulation in C++.
 
 ---
 
@@ -12,7 +11,7 @@ A simple CPU-based rasterizer that generates `.ppm` images from scratch using ra
 
 A screen is made of pixels, where each pixel stores an RGB colour.
 
-Images are constructed by filling a 2D grid of pixels.
+Images are constructed by filling a 2D grid of pixels (framebuffer).
 
 ---
 
@@ -24,6 +23,7 @@ Screens use a 2D coordinate system:
 - y increases → down  
 
 <img src="images/xy_p.png" width="550">
+
 Each (x, y) maps directly to a pixel in memory.
 
 ---
@@ -34,9 +34,9 @@ Each pixel is:
 
 R G B
 
-Each value ranges:
-- 0 = OFF
-- 255 = FULL INTENSITY
+Each channel ranges:
+- 0 = OFF  
+- 255 = FULL INTENSITY  
 
 Examples:
 - Black → 0 0 0  
@@ -51,12 +51,14 @@ Reference: https://en.wikipedia.org/wiki/RGB_color_model
 
 Images are stored as plain text `.ppm` files:
 
-P3  
-# image.ppm  
-600 400  
-256  
+```text
+P3
+# image.ppm
+600 400
+256
+```
 
-Followed by RGB values per pixel.
+Followed by RGB values for each pixel.
 
 More info: https://en.wikipedia.org/wiki/Netpbm
 
@@ -68,6 +70,7 @@ More info: https://en.wikipedia.org/wiki/Netpbm
 - Manual RGB image generation
 - Rectangle filling
 - Flag rendering using layered regions
+- Mandelbrot fractal generation
 - Export to `.ppm` format
 
 ---
@@ -83,13 +86,8 @@ Colombia Flag generated using pure C++:
 ## Build & Run
 
 ```bash
-g++ src/main.cpp -o raster
+g++ main.cpp pixel.cpp renderer.cpp -o raster
 ./raster
 xdg-open output.ppm
 ```
 
----
-
-## Goal
-
-Understand how images are built from raw pixels and how screen coordinates map to memory.
